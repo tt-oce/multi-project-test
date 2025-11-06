@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tt-oce.github.io/multi-project-test/sitemap.xml.gz
