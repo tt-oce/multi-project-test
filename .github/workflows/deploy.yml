@@ -20,14 +20,14 @@ jobs:
         uses: retypeapp/action-build@latest
         with:
           config_path: product-a/ # where retype.yml lives for product-a
-          output: build/product-a/ # output destination for this product
+          output: product-a/ # output destination for this product
 
       # Build product-b into build/product-b
       - name: Build product-b
         uses: retypeapp/action-build@latest
         with:
           config_path: product-b/
-          output: build/product-b/
+          output: product-b/
 
       # (add more products the same way)
 
@@ -36,5 +36,6 @@ jobs:
         uses: retypeapp/action-github-pages@latest
         with:
           branch: gh-pages # target branch to push the built site to
-          directory: build # <-- not "folder" — this is the input name used by the action
+          #   directory: build # <-- not "folder" — this is the input name used by the action
           update-branch: true # overwrite the target branch directly
+
