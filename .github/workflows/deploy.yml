@@ -1,0 +1,40 @@
+name: Build and deploy multi-product docs
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Build product-a into build/product-a
+      - name: Build product-a
+        uses: retypeapp/action-build@latest
+        with:
+          config_path: product-a/ # where retype.yml lives for product-a
+          output: build/product-a/ # output destination for this product
+
+      # Build product-b into build/product-b
+      - name: Build product-b
+        uses: retypeapp/action-build@latest
+        with:
+          config_path: product-b/
+          output: build/product-b/
+
+      # (add more products the same way)
+
+      # Deploy the entire build/ folder to gh-pages (or other branch)
+      - name: Publish to GitHub Pages branch
+        uses: retypeapp/action-github-pages@latest
+        with:
+          branch: gh-pages # target branch to push the built site to
+          directory: build # <-- not "folder" — this is the input name used by the action
+          update-branch: true # overwrite the target branch directly
